@@ -1,3 +1,6 @@
+mkfile_path := $(abspath $(lastword $(MAKEFILE_LIST)))
+current_dir := $(notdir $(patsubst %/,%,$(dir $(mkfile_path))))
+
 setup:
 	python3 -m venv ~/.udacity-devops
 
@@ -18,7 +21,7 @@ run-circleci-local:
 	circleci local execute
 
 lint:
-	hadolint demos/flask-sklearn/Dockerfile
+	hadolint /home/oscp/DevOps_Microservices/Lesson-2-Docker-format-containers/class-demos/demos/flask-sklearn/Dockerfile
 	pylint --disable=R,C,W1203 demos/**/**.py
 
 all: install lint test
